@@ -8,4 +8,5 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [ring "1.2.2"]
                  [compojure "1.1.6"]
-                 [com.cemerick/drawbridge "0.0.6"]])
+                 [com.cemerick/drawbridge "0.0.6"]
+                 [ring-basic-authentication "1.0.5"]])
