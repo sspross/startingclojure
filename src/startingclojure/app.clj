@@ -8,7 +8,7 @@
             [ring.middleware.nested-params :as nested-params]
             [ring.middleware.keyword-params :as keyword-params]
             [cemerick.drawbridge]
-            [ring.middleware.basic-authentication]))
+            [ring.middleware.basic-authentication :as basic]))
 
 (def counter (atom 10000))
 
@@ -40,6 +40,9 @@
       (params/wrap-params)
       (session/wrap-session)))
 
+(defn authenticated? [name pass]
+  (= [name pass] [(System/getenv "AUTH_USER") (System/getenv "AUTH_PASS")]))
+
 (defn wrap-drawbridge [handler]
   (fn [req]
     (let [handler (if (= "/repl" (:uri req))
@@ -47,9 +50,6 @@
                      drawbridge-handler authenticated?)
                     handler)]
       (handler req))))
-
-(defn authenticated? [name pass]
-  (= [name pass] [(System/getenv "AUTH_USER") (System/getenv "AUTH_PASS")]))
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (System/getenv "PORT")))]
