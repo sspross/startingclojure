@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/startingclojure-standalone.jar clojure.main -m startingclojure.app $PORT
