@@ -56,6 +56,10 @@
     (jetty/run-jetty (wrap-drawbridge app)
                      {:port port :join? false})))
 
+;; Live Heroku repl:
+;;heroku config:set AUTH_USER=admin AUTH_PASS=1234
+;;lein repl :connect http://admin:1234@secret-atoll-3325.herokuapp.com:80/repl
+
 ;; Production without drawbridge
 ;;(defn -main [port]
 ;;  (jetty/run-jetty #'app {:port (Integer. port) :join? false}))
